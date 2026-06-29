@@ -6,7 +6,7 @@ local function wakeUp()
     ClearTimecycleModifier()
     lib.hideTextUI()
     knockedOut = false
-    SetPlayerInvincibleKeepRagdollEnabled(cache.ped, false)
+    SetPlayerInvincibleKeepRagdollEnabled(cache.playerId, false)
 end
 
 local function knockedOutLoop()
@@ -41,7 +41,7 @@ AddEventHandler('gameEventTriggered', function(event, data)
     if HasPedBeenDamagedByWeapon(cache.ped, `WEAPON_UNARMED`, 0) then
         if GetEntityHealth(cache.ped) < Config.Health and not knockedOut then
             knockedOut = true
-            SetPlayerInvincibleKeepRagdollEnabled(cache.ped, true)
+            SetPlayerInvincibleKeepRagdollEnabled(cache.playerId, true)
             knockedOutLoop()
             SetTimeout(Config.KnockoutTime * 1000, wakeUp)
         end
